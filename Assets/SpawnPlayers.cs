@@ -8,6 +8,7 @@ public class SpawnPlayers : MonoBehaviourPunCallbacks
 
     public GameObject playerPrefabs;
     public float playerCount;
+    public ballBehavior ball;
 
 
     // Start is called before the first frame update
@@ -23,7 +24,7 @@ public class SpawnPlayers : MonoBehaviourPunCallbacks
         {
             Vector2 p2position = new Vector2(7.9497f, 0.1343f);
             playerPrefabs = PhotonNetwork.Instantiate(playerPrefabs.name, p2position, Quaternion.identity);
-            playerCount += 1f;  
+            playerCount += 1f;
         }
 
          
