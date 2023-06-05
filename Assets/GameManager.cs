@@ -1,0 +1,33 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class GameManager : MonoBehaviour
+{
+
+    public ballBehavior ball;
+    public SpawnPlayers SpawnPlayers;
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if(ball.gameStart == false)
+        {
+           gameStartCountdown(); 
+        }
+    }
+
+    public void gameStartCountdown()
+    {
+        StartCoroutine(ball.StartGame());
+    }
+
+    
+
+
+}
