@@ -56,6 +56,7 @@ public class ballBehavior : MonoBehaviour
             gameManager.player2score += 1f;
             placeBallCenter();
             moveBall();
+            gameManager.timerReset();
         }
 
         if(Collision.gameObject.name == "P2WALL")
@@ -63,6 +64,7 @@ public class ballBehavior : MonoBehaviour
             gameManager.player1score += 1f;
             placeBallCenter();
             moveBall();
+            gameManager.timerReset();
         }
 
         

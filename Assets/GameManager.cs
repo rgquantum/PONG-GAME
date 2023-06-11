@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun;
 
-public class GameManager : MonoBehaviour
+public class GameManager : MonoBehaviourPun
 {
 
     public ballBehavior ball;
@@ -15,13 +16,19 @@ public class GameManager : MonoBehaviour
     public Button startGameButton;
     public Text p1wintext;
     public Text p2wintext;
+    public Text timer;
+    public float maxTimer = 60f;
+    public bool timerStart = false;
 
 
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        if(PhotonNetwork.IsMasterClient == false)
+        {
+            timer.gameObject.SetActive(false);
+        }
     }
 
     // Update is called once per frame
@@ -43,7 +50,29 @@ public class GameManager : MonoBehaviour
             ball.stopBall();
             StartCoroutine(QuitGame());
         }
+
+        
+        timer.text = maxTimer.ToString();
+
+
+
+        if(maxTimer <= 0f)
+        {
+            player1score ++;
+            player2score ++;
+        }
     }
+
+    void FixedUpdate()
+    {
+        if(timerStart == true)
+        {
+            maxTimer -= Time.deltaTime;
+        }
+
+    }
+
+
 
     IEnumerator QuitGame()
     {
@@ -61,6 +90,7 @@ public class GameManager : MonoBehaviour
     {
         ball.moveBall();
         startGameButton.gameObject.SetActive(false);
+        timerStart = true;
     }
 
     public void p1wins()
@@ -71,6 +101,11 @@ public class GameManager : MonoBehaviour
     public void p2wins()
     {
         p2wintext.gameObject.SetActive(true);
+    }
+
+    public void timerReset()
+    {
+        maxTimer = 60f;
     }
     
     
